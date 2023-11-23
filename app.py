@@ -1,45 +1,65 @@
-# Create a game logic "Rock, Paper, Scissors" using Python; At each round, the player must enter one of the options in the list and be informed if they won, lost, or tied with the opponent. By the end of each round, the player can choose whether to play again. Display the player's score at the end of the game. The game must handle user inputs, putting them in lowercase and informing the user if the option is invalid.
-# The game should inform the player whether the player won, lost, or tied with the opponent. Choose to continue playing.
+# create a rock paper scissors game using python with GitHub Copilot
 
+# import the random module
 import random
 
+# create a list of options
 options = ["rock", "paper", "scissors"]
-player_score = 0
-computer_score = 0
+
+# create the score and round played variables
+score = 0
+rounds_played = 0
+
+# create the loop to play the game
 
 while True:
-    player_choice = input("Choose rock, paper, or scissors: ")
+
+    # choose a random option of the list
     computer_choice = random.choice(options)
-    print("You chose: " + player_choice)
-    print("The computer chose: " + computer_choice)
 
-    # The game should inform the player if the option entered by the player is invalid.
-    if player_choice not in options:
-        print("Invalid input. Try again.")
-        continue
+    # asking for the user input
+    player_choice = input("Rock, paper or scissors?  ")
 
-    if player_choice == computer_choice:
-        print("You tied!")
-    elif player_choice == "rock" and computer_choice == "scissors":
-        print("You win!")
-        player_score += 1
-    elif player_choice == "paper" and computer_choice == "rock":
-        print("You win!")
-        player_score += 1
-    elif player_choice == "scissors" and computer_choice == "paper":
-        print("You win!")
-        player_score += 1
+    # if player chose rock 
+    if player_choice.lower() == "rock":
+        if computer_choice == "rock":
+            print("Computer chose rock. It's a tie!")
+        elif computer_choice == "paper":
+            print("Computer chose paper. You lose!")
+        elif computer_choice == "scissors":
+            print("Computer chose scissors. You win!")
+            score += 1
+        rounds_played += 1
+
+    # if player chose paper
+    elif player_choice.lower() == "paper":
+        if computer_choice == "rock":
+            print("Computer chose rock. You win!")
+            score += 1
+        elif computer_choice == "paper":
+            print("Computer chose paper. It's a tie!")
+        elif computer_choice == "scissors":
+            print("Computer chose scissors. You lose!")
+        rounds_played += 1
+
+    # if player chose scissors
+    elif player_choice.lower() == "scissors":
+        if computer_choice == "rock":
+            print("Computer chose rock. You lose!")
+        elif computer_choice == "paper":
+            print("Computer chose paper. You win!")
+            score += 1
+        elif computer_choice == "scissors":
+            print("Computer chose scissors. It's a tie!")
+        rounds_played += 1
+
+    # if player chose something else
     else:
-        print("You lose!")
-        computer_score += 1
+        print("That's not a valid play. Check your spelling!")
 
-    print("Player Score: " + str(player_score))
-    print("Computer Score: " + str(computer_score))
-
-    play_again = input("Play again? (y/n): ")
-    if play_again != "y":
+    # ask the user if they want to play again and break the loop if they don't
+    # if they break the loop, print the score
+    play_again = input("Do you want to play again? (y/n) ")
+    if play_again.lower() != "y":
+        print(f"You played {rounds_played} rounds and got {score} points!")
         break
-
-print("Final Score: ")
-print("Player Score: " + str(player_score))
-print("Computer Score: " + str(computer_score))
